@@ -11,7 +11,7 @@ const PrimaryButton = ({ onPress, label, style, labelStyle }: {
   return (
     <TouchableOpacity
       style={[{
-        backgroundColor: Colors.palette.lime,
+        backgroundColor: Colors.palette.primary,
         paddingHorizontal: 32,
         height: 52,
         borderRadius: 26,

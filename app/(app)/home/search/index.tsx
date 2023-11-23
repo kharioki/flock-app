@@ -51,7 +51,7 @@ const Page = () => {
 
         <Space size={16} />
 
-        {selectedGenres.length > 0 && <PrimaryButton label="Filter events" onPress={handleFilter} />}
+        {selectedGenres.length > 0 && <PrimaryButton label="Filter events on selected genres" onPress={handleFilter} />}
 
         <Space size={16} />
 
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   list: {
-    gap: 12,
+    gap: 8,
     width: "100%",
     marginBottom: 100
   },

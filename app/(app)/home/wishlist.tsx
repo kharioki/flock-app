@@ -13,7 +13,6 @@ const wishlist = () => {
   const router = useRouter();
 
   const _events = mockEvents.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
-  const _going = mockEvents.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
   return (
     <MainContainer>
       <Stack.Screen
@@ -27,31 +26,6 @@ const wishlist = () => {
         <StyledText size="xl" font="semiBold" style={styles.title}>My Wishlist</StyledText>
 
         <Space size={20} />
-
-        <StyledText size="lg" font="semiBold">Going</StyledText>
-
-        <Space size={12} />
-
-        <View>
-          <FlatList
-            data={_going}
-            renderItem={({ item }) => (
-              <EventCard
-                item={item}
-                router={router}
-                isWide
-              />
-            )}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
-
-        <Space size={20} />
-
-        <StyledText size="lg" font="semiBold">Wishlist</StyledText>
-
-        <Space size={12} />
 
         <View>
           <FlatList

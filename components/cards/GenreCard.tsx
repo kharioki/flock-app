@@ -18,7 +18,7 @@ const GenreCard = ({ item, handleSelect, selected }: Props) => {
       style={[
         styles.card,
         { width: width / 3 - 20 },
-        selected && { borderColor: Colors.palette.olive }
+        selected && { borderColor: Colors.palette.primary }
       ]}
       onPress={() => handleSelect(item.label)}
     >
