@@ -1,5 +1,5 @@
 import { FlatList, Pressable, StyleSheet, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form";
 import MainContainer from '../../../../components/containers/MainContainer'
 import StyledText from '../../../../components/common/StyledText'
@@ -12,12 +12,32 @@ import { useRouter } from 'expo-router';
 import GenreCard from '../../../../components/cards/GenreCard';
 import { Genres } from '../../../../utils/genre';
 import PrimaryButton from '../../../../components/buttons/PrimaryButton';
+import { mockEvents } from '../../../../mock/events';
+import DebouncedInput from '../../../../components/inputs/DebouncedInput';
+import EventCard from '../../../../components/cards/EventCard';
 
 const Page = () => {
   const router = useRouter();
 
   const [selectedGenres, setSelectedGenres] = useState<Array<string>>([]);
-  const { control, handleSubmit, setValue, register, formState: { errors } } = useForm();
+  const [events, setEvents] = useState<Array<any>>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<Array<any>>([]);
+  const { control } = useForm();
+
+  const handleSearch = () => {
+    if (searchTerm.length > 0) {
+      const _events = mockEvents.filter(e => e.title.toLowerCase().includes(searchTerm.toLowerCase()))
+
+      setEvents(_events)
+      setSearchResults(_events)
+    }
+  }
+
+  const handleReset = () => {
+    setSearchTerm("");
+    setEvents([]);
+  }
 
   const onSelectGenre = (genre: string) => {
     if (selectedGenres.includes(genre)) {
@@ -28,7 +48,14 @@ const Page = () => {
   }
 
   const handleFilter = () => {
+    // filter events on selected genres
+    const _filteredEvents = mockEvents.filter(e =>
+      selectedGenres.some(genre => e.category.includes(genre))
+    )
 
+    setEvents(_filteredEvents);
+    // setSearchResults(_filteredEvents);
+    setSelectedGenres([]);
   }
 
   return (
@@ -41,36 +68,84 @@ const Page = () => {
               placeholder="Search event...(e.g. NYE 2024)"
               control={control}
               style={styles.input}
+              value={searchTerm}
+              onChangeText={setSearchTerm}
             />
+            {/* <DebouncedInput
+              name="search"
+              placeholder="Search event...(e.g. NYE 2024)"
+              control={control}
+              style={styles.input}
+              value={searchTerm}
+              onChangeText={setSearchTerm}
+            /> */}
           </View>
           <Space size={8} horizontal />
-          <Pressable style={styles.btn} onPress={() => router.push('/home/search/filter')}>
-            <Ionicons name="ios-options" size={24} color={Colors.palette.text} />
-          </Pressable>
+          {events.length === 0 ?
+            (
+              <Pressable style={styles.btn} onPress={handleSearch}>
+                <Ionicons name="search" size={24} color={Colors.palette.text} />
+              </Pressable>
+            ) : (
+              <Pressable style={styles.btn} onPress={() => handleReset()}>
+                <Ionicons name="close" size={24} color={Colors.palette.ash} />
+              </Pressable>
+            )
+          }
         </Row>
 
         <Space size={16} />
 
-        {selectedGenres.length > 0 && <PrimaryButton label="Filter events on selected genres" onPress={handleFilter} />}
+        {events.length === 0 && (
+          <View>
+            {selectedGenres.length > 0 && <PrimaryButton label="Filter events on selected genres" onPress={handleFilter} />}
 
-        <Space size={16} />
+            <Space size={16} />
 
-        <View style={styles.listContainer}>
-          <FlatList
-            data={Genres}
-            renderItem={({ item }) => (
-              <GenreCard
-                item={item}
-                handleSelect={onSelectGenre}
-                selected={selectedGenres.includes(item.label)}
+            <View style={styles.listContainer}>
+              <FlatList
+                data={Genres}
+                renderItem={({ item }) => (
+                  <GenreCard
+                    item={item}
+                    handleSelect={onSelectGenre}
+                    selected={selectedGenres.includes(item.value)}
+                  />
+                )}
+                numColumns={3}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.list}
+                scrollEnabled={false}
               />
-            )}
-            numColumns={3}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.list}
-            scrollEnabled={false}
-          />
-        </View>
+            </View>
+          </View>
+        )}
+
+        {events.length > 0 ? (
+          <View style={styles.listContainer}>
+            <FlatList
+              data={events}
+              renderItem={({ item }) => (
+                <EventCard
+                  item={item}
+                  router={router}
+                />
+              )}
+              showsVerticalScrollIndicator={false}
+              numColumns={2}
+              contentContainerStyle={styles.list}
+              scrollEnabled={false}
+            />
+          </View>
+        ) : (
+          <View>
+            <View style={styles.centered}>
+              <StyledText size="lg" font="light" style={styles.text}>No events found.</StyledText>
+            </View>
+          </View>
+        )}
+
+
       </View>
     </MainContainer>
   )
@@ -113,4 +188,13 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 100
   },
+  centered: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 40,
+  },
+  text: {
+    color: Colors.palette.ash,
+    paddingVertical: 8,
+  }
 })

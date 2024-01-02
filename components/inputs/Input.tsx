@@ -29,7 +29,7 @@ const Input = (props: InputProps) => {
         isTextarea && { height: 90 },
         {
           borderColor: Colors.palette.ash,
-          color: Colors.palette.charcoal
+          color: Colors.palette.text
         },
         style
       ]}
@@ -43,7 +43,7 @@ const Input = (props: InputProps) => {
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
+    height: 48,
     borderWidth: 1,
     borderRadius: 8,
     padding: 8,

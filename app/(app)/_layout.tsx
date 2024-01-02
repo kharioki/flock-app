@@ -1,10 +1,9 @@
 import { Link, Tabs, Stack } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import { Pressable } from 'react-native';
 
 import Colors from '../../constants/Colors';
 
 export default () => {
-  const colorScheme = useColorScheme();
 
   return (
     <Stack>

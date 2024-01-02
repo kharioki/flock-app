@@ -4,6 +4,8 @@ import { StyleSheet, View } from 'react-native';
 import StyledText from '../components/common/StyledText';
 import MainContainer from '../components/containers/MainContainer';
 
+// TODO: update this view to display page not found. Also add error boundary
+
 export default function NotFoundScreen() {
   return (
     <MainContainer>

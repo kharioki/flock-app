@@ -1,7 +1,6 @@
 import React from 'react'
 import { ImageBackground, StyleSheet, useWindowDimensions, View, Pressable } from 'react-native'
 import StyledText from '../common/StyledText'
-import { Ionicons } from '@expo/vector-icons'
 import Colors from '../../constants/Colors'
 
 type Props = {
@@ -20,7 +19,7 @@ const GenreCard = ({ item, handleSelect, selected }: Props) => {
         { width: width / 3 - 20 },
         selected && { borderColor: Colors.palette.primary }
       ]}
-      onPress={() => handleSelect(item.label)}
+      onPress={() => handleSelect(item.value)}
     >
       <ImageBackground source={{ uri: item.image }} style={styles.image} imageStyle={styles.radius}>
         <View style={styles.content}>
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 10,
     borderRadius: 12,
-    opacity: 0.5,
+    opacity: 0.8,
     backgroundColor: Colors.palette.charcoal
   },
 })

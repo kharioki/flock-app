@@ -2,6 +2,8 @@ import React from 'react'
 import { TouchableOpacity, Text, StyleProp, ViewStyle, TextStyle } from 'react-native'
 import Colors from '../../constants/Colors';
 
+// TODO: convert this to use Pressable component
+
 const PrimaryButton = ({ onPress, label, style, labelStyle }: {
   onPress: () => void;
   label: string;

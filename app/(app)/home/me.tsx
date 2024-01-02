@@ -7,6 +7,7 @@ import { Image } from 'expo-image'
 import Space from '../../../components/common/Space'
 import { Entypo, Feather, Ionicons } from '@expo/vector-icons'
 import Row from '../../../components/common/Row'
+import { useAuth } from '../../../context/auth'
 
 const user = {
   uid: '1',
@@ -17,6 +18,7 @@ const user = {
 };
 
 const me = () => {
+  const { signOut } = useAuth();
   return (
     <MainContainer>
       <View style={styles.main}>
@@ -103,6 +105,19 @@ const me = () => {
 
         <View style={styles.divider} />
 
+        <Space size={16} />
+
+        <View style={styles.centered}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.btn,
+              pressed && { backgroundColor: Colors.palette.card }
+            ]}
+            onPress={signOut}>
+            <StyledText size="md" font="regular" style={styles.btnText}>Sign Out</StyledText>
+          </Pressable>
+        </View>
+
         <Space size={100} />
 
       </View>
@@ -150,5 +165,23 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.palette.card,
     opacity: 0.2,
     marginVertical: 10,
+  },
+  centered: {
+    width: "100%",
+    justifyContent: "center",
+  },
+  btn: {
+    height: 48,
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    backgroundColor: Colors.palette.bgPurple,
+    borderWidth: 0.7,
+    borderColor: Colors.palette.lightGray,
+    gap: 20
+  },
+  btnText: {
+    color: Colors.palette.primary
   }
 })

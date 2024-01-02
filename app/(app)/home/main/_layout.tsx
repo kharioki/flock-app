@@ -1,6 +1,5 @@
 import { Stack } from 'expo-router';
 import Colors from '../../../../constants/Colors';
-import StyledText from '../../../../components/common/StyledText';
 
 export default () => {
   return (

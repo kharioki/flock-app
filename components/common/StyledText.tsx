@@ -7,7 +7,7 @@ import Colors from '../../constants/Colors';
 
 type StyledTextProps = {
   children: React.ReactNode;
-  size?: 'xs' | 'sm' | 'base' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'base' | 'md' | 'lg' | 'xl' | 'xxl';
   font?: 'bold' | 'regular' | 'medium' | 'semiBold' | 'light' | 'thin';
   variant?: 'text' | 'link' | 'primary' | 'secondary';
   style?: StyleProp<TextStyle>;
@@ -40,6 +40,7 @@ const StyledText = ({
     md: 16,
     lg: 18,
     xl: 22,
+    xxl: 24,
   };
   const fonts: Record<NonNullable<StyledTextProps['font']>, string> = {
     bold: primary.bold,

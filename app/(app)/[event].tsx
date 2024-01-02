@@ -41,7 +41,7 @@ const Page = () => {
       />
       <View style={styles.main}>
         <ImageBackground
-          source={{ uri: _event.poster }}
+          source={{ uri: _event?.poster }}
           style={[styles.topImage, { height: height / 2, width }]}
           resizeMode='cover'
         >
@@ -56,14 +56,14 @@ const Page = () => {
         </ImageBackground>
 
         <View style={styles.wrapper}>
-          <StyledText size="lg" font="medium">{_event.title}</StyledText>
+          <StyledText size="lg" font="medium">{_event?.title}</StyledText>
 
           <Space size={20} />
 
           <View style={styles.textRow}>
             <MaterialIcons name="date-range" size={20} color={Colors.palette.ash} />
             <Space size={16} horizontal />
-            <StyledText style={styles.text}>{dayjs(_event.date).format("DD MMM YYYY")}</StyledText>
+            <StyledText style={styles.text}>{dayjs(_event?.date).format("DD MMM YYYY")}</StyledText>
           </View>
 
           <Space size={8} />
@@ -71,7 +71,7 @@ const Page = () => {
           <View style={styles.textRow}>
             <Ionicons name="md-time-outline" size={20} color={Colors.palette.ash} />
             <Space size={16} horizontal />
-            <StyledText style={styles.text}>{dayjs(_event.time).format("hh:mm A")}</StyledText>
+            <StyledText style={styles.text}>{dayjs(_event?.time).format("hh:mm A")}</StyledText>
           </View>
 
           <Space size={12} />
@@ -79,7 +79,7 @@ const Page = () => {
           <View style={styles.textRow}>
             <MaterialCommunityIcons name="map-marker-path" size={20} color={Colors.palette.ash} />
             <Space size={16} horizontal />
-            <StyledText style={styles.text}>{_event.venue}</StyledText>
+            <StyledText style={styles.text}>{_event?.venue}</StyledText>
           </View>
 
           <Space size={12} />
@@ -87,7 +87,7 @@ const Page = () => {
           <View style={styles.textRow}>
             <Ionicons name="location-outline" size={20} color={Colors.palette.ash} />
             <Space size={16} horizontal />
-            <StyledText style={styles.text}>{_event.location}</StyledText>
+            <StyledText style={styles.text}>{_event?.location}</StyledText>
           </View>
 
           <Space size={12} />
@@ -95,7 +95,7 @@ const Page = () => {
           <View style={styles.textRow}>
             <Ionicons name="pricetag-outline" size={20} color={Colors.palette.ash} />
             <Space size={16} horizontal />
-            <StyledText style={styles.text}>{_event.tickets ? `${_event.tickets?.currency} ${_event.tickets?.price}` : "Free"}</StyledText>
+            <StyledText style={styles.text}>{_event?.tickets ? `${_event?.tickets?.currency} ${_event?.tickets?.price}` : "Free"}</StyledText>
           </View>
 
           <Space size={20} />
@@ -104,7 +104,7 @@ const Page = () => {
 
           <Space size={12} />
 
-          <StyledText size="base" font="regular" style={styles.text}>{_event.description}</StyledText>
+          <StyledText size="base" font="regular" style={styles.text}>{_event?.description}</StyledText>
 
         </View>
       </View>
