@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView, View } from 'react-native'
+import { StyleSheet, View, ImageBackground } from 'react-native'
 import React from 'react'
 import { useRouter } from 'expo-router'
 
@@ -7,18 +7,24 @@ import Colors from '../../constants/Colors'
 import Space from '../../components/common/Space'
 import PrimaryButton from '../../components/buttons/PrimaryButton'
 
-const IntroScreen = () => {
+const introScreen = () => {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={{ backgroundColor: Colors.palette.bg, flex: 1 }}>
+    <ImageBackground
+      source={require("../../assets/images/_bg.jpg")}
+      style={styles.container}
+      resizeMode='cover'
+    >
       <View style={styles.main}>
-        <View style={styles.jumbotron}>
-          <StyledText size="xxl" font="bold">Finding Events Nearby,</StyledText>
-          <Space size={12} />
-          <StyledText size="lg" font="medium">has never been easier...</StyledText>
-        </View>
         <View style={styles.bottom}>
+          <Space size={20} />
+          <View style={styles.jumbotron}>
+            <StyledText size="xxl" font="bold">Finding Events Nearby,</StyledText>
+            <Space size={12} />
+            <StyledText size="lg" font="medium">has never been easier...</StyledText>
+          </View>
+          <Space size={40} />
           <View style={styles.stats}>
             <View style={styles.stat}>
               <StyledText size="xxl" font="bold">28</StyledText>
@@ -38,22 +44,28 @@ const IntroScreen = () => {
             </View>
           </View>
 
+          <Space size={40} />
+
           <PrimaryButton label="Continue" onPress={() => router.replace("/signin")} style={styles.btn} />
+
+          <Space size={20} />
         </View>
       </View>
-    </SafeAreaView>
+    </ImageBackground>
   )
 }
 
-export default IntroScreen
+export default introScreen
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   main: {
     alignItems: "center",
     flex: 1,
     justifyContent: "center",
-    gap: 30,
-    padding: 20,
+    backgroundColor: Colors.palette.bgFadePurple,
   },
   jumbotron: {
     width: "100%",
@@ -61,10 +73,10 @@ const styles = StyleSheet.create({
   bottom: {
     top: "30%",
     width: "100%",
+    backgroundColor: Colors.palette.bgFadePurple,
+    alignItems: "center",
     bottom: 0,
-    left: 0,
-    right: 0,
-    gap: 40
+    padding: 16
   },
   stats: {
     width: "100%",

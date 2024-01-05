@@ -22,6 +22,7 @@ const palette = {
   bg: '#1f2025',
   // bgPurple: '#42345b',
   bgPurple: '#202121',
+  bgFadePurple: '#20212160'
 
 }
 
