@@ -9,6 +9,7 @@ import { useAuth } from '../../context/auth'
 import Input from '../../components/inputs/Input'
 import Space from '../../components/common/Space'
 import Colors from '../../constants/Colors'
+import PrimaryButton from '../../components/buttons/PrimaryButton'
 
 type FormData = {
   email: string;
